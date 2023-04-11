@@ -1,12 +1,10 @@
 ###Phenotypic analysis using rawphenotypes for both year
-
-
 ##Analysis
 
-setwd("~/Box Sync/LinPotato/Objective 2/Phenotypes/")
 
-WI20 <- read.csv("~/Box Sync/LinPotato/Objective 2/Stagewise/Hancock20_pheno.csv", as.is = T, check.names = F)
-FUll21 <- read.csv("~/Box Sync/LinPotato/Objective 2/Stagewise/Hancock21_pheno.csv",as.is = T, check.names = F)
+
+WI20 <- read.csv("Hancock20_pheno.csv", as.is = T, check.names = F)
+FUll21 <- read.csv("Hancock21_pheno.csv",as.is = T, check.names = F)
 
 WI.id <- grep("W2x", FUll21$id)#335 plots
 
@@ -14,8 +12,6 @@ WI21 <- FUll21[WI.id,]
 
 MSU.id <- grep("MS", FUll21$id)
 MSU21<- FUll21[MSU.id,] #57 plots
-
-
 
 ###################################correlations
 
@@ -40,8 +36,6 @@ corrplot(m, p.mat =p.mat, method = 'circle', type = 'lower', insig='blank',
          addCoef.col ='black', number.cex = 0.8, order = 'original', diag=FALSE, addrect = 2)
 #dev.off()
 
-
-
 ###UVA
 library(ggplot2)
 #For 2020
@@ -50,7 +44,6 @@ lim1 <- data.frame(DAP=c(48,56,76,92,100,108),y=apply(WI20[,22:27],2,median,na.r
 
 #"NDVI"
 lim2 <- data.frame(DAP=c(48,56,76,92,100,108),y=apply(WI20[,35:40],2,median,na.rm=T),y95=apply(WI20[,35:40],2,max,na.rm=T))
-
 
 
 #For 2021
