@@ -1,12 +1,12 @@
 ####Use field imager to extract the data for field trial 2021. 
 ###Stand count, Canopy, NDVI, and Vine Maturity
 
-setwd("~/Box Sync/DRONE_UW/2021/Diploids/")
+
 library(FIELDimageR)
 library(raster)
 
 #build the shape file first for diploids using 5band image on 07/14/2021 since we need NIR.Better plot map comparing with 06/29 pics
-data <- stack("~/Box Sync/DRONE_UW/2021/Mosaic/5band/HARS/2021_UW_Madison-HARS-08-04_d4k_5_band_mosaic.tif")
+data <- stack("2021_UW_Madison-HARS-08-04_d4k_5_band_mosaic.tif")
 
 
 #Crop the image for diploids trial (westC31) and reducing size using fast.plot=T
@@ -23,7 +23,7 @@ data.rotated <- fieldRotate(mosaic = data, theta = 2.571, clockwise = FALSE, ext
 
 #Building shape file with ncols = 14, nrows = 28
 
-tmp<- read.csv("~/Box Sync/LinPotato/2021/Field trial 2021/Diploid Field Trial 2021.csv", header = T)[1:392,]
+tmp<- read.csv("Diploid Field Trial 2021.csv", header = T)[1:392,]
 print(n.range <- max(tmp$Range)) #28 ranges
 
 
@@ -59,7 +59,7 @@ save(list=c("data.mask","plotShape"),file="Diploid_mask_shapefile0629.rda")
 ##########Use shapefile created 06/29/2021 to calculate indices for other DAPs
 load("Diploid_mask_shapefile0629.rda")
 
-filenames <- paste0("~/Box Sync/DRONE_UW/2021/Mosaic/5band/HARS/",c("2021_UW_Madison-HARS-06-01_d4k_5_band_mosaic.tif",
+filenames <- paste0("ROUTE OF YOUR CHOICE",c("2021_UW_Madison-HARS-06-01_d4k_5_band_mosaic.tif",
                                           "2021_UW_Madison-HARS-06-09_d4k_5_band_mosaic.tif",
                                           "2021_UW_Madison-HARS-06-16_d4k_5_band_mosaic.tif",
                                           "2021_UW_Madison-HARS-06-29_d4k_5_band_mosaic.tif",
@@ -100,6 +100,6 @@ output <- data.frame(env=data.all$DAP,id=data.all$Name,plot=data.all$Plot,
                      NDRE=data.all$NDRE,GLI=data.all$GLI,Canopy=data.all$Canopy)
 
   
-write.csv(output, "Diploid UAV Data2021_0629shape.csv", col.names = T, row.names = F)    
+write.csv(output, "Diploid UAV Data2021.csv", col.names = T, row.names = F)    
 
 
